@@ -4,11 +4,13 @@ using System.Collections;
 public class MetaMorph : MonoBehaviour {
 
 	//public
-	public Rigidbody2D rb;
     public GameObject explosion;
     public float speed;
-    private int transf;
+	public AudioClip meow;
+
+	private int transf;
     private float timer = 1f;
+	private Rigidbody2D rb;
 
 	public enum State {
 		Cat,
@@ -35,8 +37,18 @@ public class MetaMorph : MonoBehaviour {
             gameObject.GetComponent<Animator>().SetTrigger("cat");
         }
 	}
+
+	IEnumerator songAndDie()
+	{
+		gameObject.GetComponent<AudioSource> ().PlayOneShot (meow);
+		yield return new WaitForSeconds (meow.length);
+	}
+
     void OnMouseDown()
     {
+		if (state == State.Cat) {
+			StartCoroutine (songAndDie ());
+		}
         Instantiate(explosion, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }

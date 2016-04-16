@@ -3,14 +3,17 @@
 public class spawner : MonoBehaviour
 {
     public GameObject enemy;
-    public float spawnTime = 3f;
+    public float spawnTimeMax = 3f;
     public float delay = 0f;
     private float tmp;
 
 
     void Start()
     {
-        tmp = delay;
+		if (delay > 0)
+			tmp = Random.Range (0, delay);
+		else
+			tmp = Random.Range (delay, 3f);
     }
 
 
@@ -18,7 +21,7 @@ public class spawner : MonoBehaviour
     {
         if (tmp <= 0)
         {
-            tmp = spawnTime;
+			tmp = Random.Range(3f, spawnTimeMax);
             Instantiate(enemy, this.transform.position, this.transform.rotation);
         }
         else
