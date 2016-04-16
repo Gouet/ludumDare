@@ -11,8 +11,10 @@ public class MetaMorph : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (Input.GetButtonDown("Jump"))
-			rb.velocity = new Vector3(0, 10, 0);
+		if (Input.GetButtonDown ("Jump")) {
+			rb.velocity = new Vector3 (0, 10, 0);
+			Debug.Log ("loffff");
+		}
 	}
 
 	// Use this for initialization
