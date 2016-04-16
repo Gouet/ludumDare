@@ -2,18 +2,24 @@
 
 public class spawner : MonoBehaviour
 {
-    public GameObject enemy;                // The enemy prefab to be spawned.
-    public float spawnTime = 3f;            // How long between each spawn.
+    public GameObject enemy;
+    public float spawnTime = 3f;
+    private float tmp = 0f;
 
 
     void Start()
     {
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
 
-    void Spawn()
+    void FixedUpdate()
     {
-        Instantiate(enemy, this.transform.position, this.transform.rotation);
+        if (tmp <= 0)
+        {
+            tmp = spawnTime;
+            Instantiate(enemy, this.transform.position, this.transform.rotation);
+        }
+        else
+            tmp -= Time.deltaTime;
     }
 }
