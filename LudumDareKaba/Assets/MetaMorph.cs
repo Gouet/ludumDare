@@ -12,6 +12,7 @@ public class MetaMorph : MonoBehaviour {
     private float timer = 1f;
 	private Rigidbody2D rb;
 	private AudioSource audiosrc;
+    private bool canTrans = false;
 
 	public enum State {
 		Cat,
@@ -26,18 +27,26 @@ public class MetaMorph : MonoBehaviour {
 		audiosrc = GetComponent<AudioSource>();
 	}
 
-	void FixedUpdate() {
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.name == "activator")
+        {
+            canTrans = !canTrans;
+        }
+    }
+
+    void FixedUpdate() {
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
             transf = Random.Range(0, 5);
             timer = 1f;
         }
-		if (transf == 3 && state == State.Goblin)
+		if (transf == 3 && canTrans == true && state == State.Goblin)
         {
 			audiosrc.PlayOneShot (meow);
             state = State.Cat;
-			gameObject.GetComponent<BoxCollider2D> ().offset = new Vector2 (-1.094101f, -0.05470467f);
+			gameObject.GetComponent<BoxCollider2D> ().offset = new Vector2 (0f, -0.05470467f);
 			gameObject.GetComponent<BoxCollider2D> ().size = new Vector2 (3.371798f, 3.945899f);
             gameObject.GetComponent<Animator>().SetTrigger("cat");
         }
