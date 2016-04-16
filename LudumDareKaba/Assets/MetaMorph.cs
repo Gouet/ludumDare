@@ -12,18 +12,15 @@ public class MetaMorph : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (Input.GetButtonDown ("Jump")) {
-			rb.velocity = new Vector3 (0, 10, 0);
+		//	rb.velocity = new Vector2 (0, 10);
+
 			Debug.Log ("loffff");
 		}
 	}
-
-	// Use this for initialization
-//	void Start () {
-//		
-//	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//this.transform.position = new Vector2 (this.transform.position.x, 0);
+		//rb.velocity = Vector2.right;
 	}
 }
