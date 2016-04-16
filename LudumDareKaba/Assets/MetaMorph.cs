@@ -5,14 +5,17 @@ public class MetaMorph : MonoBehaviour {
 
 	//public
 	public Rigidbody2D rb;
+    public GameObject explosion;
     public float speed;
+    private int transf;
+    private float timer = 1f;
 
 	public enum State {
 		Cat,
-		Zombie
+		Goblin
 	};
 
-	public State state;
+	public State state = State.Goblin;
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
@@ -20,16 +23,25 @@ public class MetaMorph : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (Input.GetButtonDown ("Jump")) {
-		//	rb.velocity = new Vector2 (0, 10);
-
-			Debug.Log ("loffff");
-		}
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
+        {
+            transf = Random.Range(0, 5);
+            timer = 1f;
+        }
+        if (transf == 3)
+        {
+            state = State.Cat;
+            gameObject.GetComponent<Animator>().SetTrigger("cat");
+        }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		//this.transform.position = new Vector2 (this.transform.position.x, 0);
-		//rb.velocity = Vector2.right;
+    void OnMouseDown()
+    {
+        Instantiate(explosion, this.transform.position, this.transform.rotation);
+        Destroy(this.gameObject);
+    }
+    // Update is called once per frame
+    void Update () {
+        
 	}
 }
