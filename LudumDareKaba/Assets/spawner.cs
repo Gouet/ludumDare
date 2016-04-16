@@ -6,6 +6,7 @@ public class spawner : MonoBehaviour
     public float spawnTimeMax = 3f;
     public float delay = 0f;
     private float tmp;
+	public int order = 0;
 
 
     void Start()
@@ -14,6 +15,8 @@ public class spawner : MonoBehaviour
 			tmp = Random.Range (0, delay);
 		else
 			tmp = Random.Range (delay, 3f);
+		Debug.Log (enemy.GetComponent<SpriteRenderer>());
+		enemy.GetComponent<Renderer> ().sortingOrder = order;
     }
 
 

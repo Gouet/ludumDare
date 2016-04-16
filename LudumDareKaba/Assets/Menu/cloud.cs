@@ -9,7 +9,7 @@ public class cloud : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		transform.position = new Vector2(transform.position.x, transform.position.y + (float)(Random.value % 15 - 3));
+		transform.position = new Vector2(transform.position.x, transform.position.y + (float)(Random.Range(-5, 5)));
 		rb.velocity = Vector2.right * (float)(Random.value % 20 + 1);
 	}
 	

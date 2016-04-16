@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 52d004cee14d643179b527d4dbfecf3d
-timeCreated: 1460796616
+timeCreated: 1460828821
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - explosion: {instanceID: 0}
+  - meow: {fileID: 8300000, guid: bb965d2c3a7c041608974a8fca104285, type: 3}
+  - sprotch: {fileID: 8300000, guid: c6d8a911f8b8213439f0a91611ea3a44, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
