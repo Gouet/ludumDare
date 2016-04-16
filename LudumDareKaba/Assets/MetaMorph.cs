@@ -6,6 +6,14 @@ public class MetaMorph : MonoBehaviour {
 	//public
 	public Rigidbody2D rb;
     public float speed;
+
+	public enum State {
+		Cat,
+		Zombie
+	};
+
+	public State state;
+
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
 		rb.velocity = Vector2.right * speed;
