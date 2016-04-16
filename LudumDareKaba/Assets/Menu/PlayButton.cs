@@ -14,14 +14,11 @@ public class PlayButton : MonoBehaviour {
 		SceneManager.LoadScene("Kaba");
 	}
 
-	public void onClickToDispalyCredit()
-	{
-		Debug.Log ("CREDIT");
-	}
 
 	public void onClickToExit()
 	{
-
+		Debug.Log ("EXIT");
+		Application.Quit();
 	}
 
 	// Update is called once per frame
