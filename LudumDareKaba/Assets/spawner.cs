@@ -4,11 +4,13 @@ public class spawner : MonoBehaviour
 {
     public GameObject enemy;
     public float spawnTime = 3f;
-    private float tmp = 0f;
+    public float delay = 0f;
+    private float tmp;
 
 
     void Start()
     {
+        tmp = delay;
     }
 
 
