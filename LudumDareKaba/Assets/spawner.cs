@@ -3,6 +3,7 @@
 public class spawner : MonoBehaviour
 {
     public GameObject enemy;
+	public float spawnTimeMin = 0f;
     public float spawnTimeMax = 3f;
     public float delay = 0f;
     private float tmp;
@@ -11,20 +12,15 @@ public class spawner : MonoBehaviour
 
     void Start()
     {
-		if (delay > 0)
-			tmp = Random.Range (0, delay);
-		else
-			tmp = Random.Range (delay, 3f);
-		Debug.Log (enemy.GetComponent<SpriteRenderer>());
+		tmp = Random.Range (spawnTimeMin, spawnTimeMax);
 		enemy.GetComponent<Renderer> ().sortingOrder = order;
     }
-
 
     void FixedUpdate()
     {
         if (tmp <= 0)
         {
-			tmp = Random.Range(3f, spawnTimeMax);
+			tmp = Random.Range(spawnTimeMin, spawnTimeMax);
             Instantiate(enemy, this.transform.position, this.transform.rotation);
         }
         else
