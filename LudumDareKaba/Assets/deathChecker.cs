@@ -15,6 +15,8 @@ public class deathChecker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isAlive == false && float.Parse(t.text) > 0)
+            isAlive = true;
 		if (isAlive && float.Parse (t.text) <= 0) {
 			this.GetComponent<Canvas> ().enabled = true;
 			f = float.Parse(GameObject.Find("Score").GetComponent<Text>().text);
