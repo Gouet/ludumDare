@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class PlayButton : MonoBehaviour {
+public class EndButtons : MonoBehaviour {
 
 	// Use this for initialization
 //	void Start () {
@@ -15,17 +15,11 @@ public class PlayButton : MonoBehaviour {
 		SceneManager.LoadScene("Kaba");
 	}
 
-	public void resetHighscore()
+	public void onClickToMenu()
 	{
-		PlayerPrefs.SetFloat ("Highscore", 0);
+		SceneManager.LoadScene ("Menu");
 	}
-
-	public void onClickToExit()
-	{
-		Debug.Log ("EXIT");
-		Application.Quit();
-	}
-
+		
 	// Update is called once per frame
 //	void Update () {
 //	

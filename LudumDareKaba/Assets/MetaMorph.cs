@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MetaMorph : MonoBehaviour {
 
@@ -7,6 +8,8 @@ public class MetaMorph : MonoBehaviour {
     public GameObject explosion;
     public float speed;
 	public AudioClip meow;
+
+	public GameObject textEditorObject;
 
 	private int transf;
     private float timer = 1f;
@@ -23,12 +26,16 @@ public class MetaMorph : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
-		rb.velocity = Vector2.right * speed;
+		rb.velocity = Vector2.right * (speed + (speed < 0 ? -1 : 1) * (float.Parse(GameObject.Find("Score").GetComponent<Text>().text)) / 1000);
 		audiosrc = GetComponent<AudioSource>();
 	}
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+		if (state == State.Cat && coll.gameObject.name == "destructor") {
+			GameObject g = GameObject.Find ("LifeCount");
+			g.GetComponent<Text> ().text = Mathf.Max((float.Parse (g.GetComponent<Text> ().text) - 1), 0).ToString ();
+		}
         if (coll.gameObject.name == "activator")
         {
             canTrans = !canTrans;
@@ -54,8 +61,18 @@ public class MetaMorph : MonoBehaviour {
 
     void OnMouseDown()
     {
-		Instantiate(explosion, this.transform.position, this.transform.rotation);
-        Destroy(this.gameObject);
+		if (deathChecker.isAlive)
+		{
+			Instantiate(explosion, this.transform.position, this.transform.rotation);
+			if (state == State.Cat) {
+				GameObject g = GameObject.Find ("Score");
+				g.GetComponent<Text> ().text = (float.Parse (g.GetComponent<Text> ().text) + 10).ToString ();
+			} else if (state == State.Goblin) {
+				GameObject g = GameObject.Find ("LifeCount");
+				g.GetComponent<Text> ().text = (float.Parse (g.GetComponent<Text> ().text) - 1).ToString ();
+			}
+	        Destroy(this.gameObject);
+		}
     }
     // Update is called once per frame
     void Update () {

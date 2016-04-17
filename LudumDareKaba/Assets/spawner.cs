@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class spawner : MonoBehaviour
 {
@@ -12,15 +13,15 @@ public class spawner : MonoBehaviour
 
     void Start()
     {
-		tmp = Random.Range (spawnTimeMin, spawnTimeMax);
+		tmp = Random.Range(2f, 8f);
 		enemy.GetComponent<Renderer> ().sortingOrder = order;
     }
 
     void FixedUpdate()
     {
-        if (tmp <= 0)
+		if (tmp <= 0)
         {
-			tmp = Random.Range(spawnTimeMin, spawnTimeMax);
+			tmp = Random.Range(Mathf.Max(spawnTimeMin - (float.Parse(GameObject.Find("Score").GetComponent<Text>().text) / 100), 1f), spawnTimeMax);
             Instantiate(enemy, this.transform.position, this.transform.rotation);
         }
         else
